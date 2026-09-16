@@ -1,0 +1,45 @@
+# 本地模型及权重
+/check_points/
+*.safetensors
+*.pt
+*.pth
+*.onnx
+*.onnx_data
+
+# 本地凭据与个人工具配置
+.env
+.env.*
+!.env.example
+/.claude/
+
+# Python 环境及缓存
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# 本地数据、工具包及运行产物
+/utils/*.jsonl
+/RAGAS/*_samples_cleaned.json
+/downloads/*.zip
+/data/
+/tmp/
+/logs/
+*.log
+/output_excels/
+/output_jsons/
+/extract_templates/
+/chroma_data/
+/chroma_temp_dir/
+/utils/chroma_data*/
+/zhy_test/
+
+# 操作系统文件
+.DS_Store
+Thumbs.db

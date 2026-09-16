@@ -1,0 +1,1170 @@
+
+/* 步骤标题样式 */
+
+.step-title,
+.step-title * {
+  font-size: 18px !important;     /* 调大/调小只改这里 */
+  font-weight: 700 !important;     /* 加粗 */
+  color: #333 !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+}
+
+/* 如果之前偶尔用了 ##/### 等标题语法，也统一掉它们的大小 */
+.step-title h1,
+.step-title h2,
+.step-title h3,
+.step-title h4,
+.step-title p,
+.step-title strong,
+.step-title span {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #333 !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+}
+
+
+/* 提示：淡黄色背景 */
+.hint-box{
+  background:#FFFBEA;              /* 淡黄背景，可微调为 #FFFCE8 / #FFF8DB */
+  border-left:6px solid #FACC15;   /* 左侧强调条 */
+  padding:10px 14px; border-radius:10px;
+  color:#92400E;                   /* 提示文字颜色 */
+}
+.hint-emoji{ margin-right:6px; }
+.hint-title{ font-weight:700; margin-right:4px; }
+
+
+/* 上传区域样式 */
+.upload-box {
+  background-color: #f9fafb;
+  border: 2px dashed #d1d5db;
+  border-radius: 10px;
+  padding: 20px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s;
+}
+.upload-box:hover {
+  border-color: #60a5fa;
+}
+
+/* 操作按钮样式 */
+
+/* 行容器：按钮在同一行对齐 */
+.action-bar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* 左侧：通栏深蓝主按钮 */
+.btn-process {
+  flex: 1 1 auto;                /* 占满剩余宽度 */
+  background: #2563eb !important;/* 深蓝 */
+  color: #fff !important;
+  border: none !important;
+  border-radius: 10px !important;
+  padding: 12px 16px !important;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, .25) !important;
+  background-image: none !important;
+  font-weight: 700 !important;
+  letter-spacing: .5px;
+}
+.btn-process:hover { background: #1d4ed8 !important; }
+.btn-process:disabled {
+  background: #93c5fd !important; color: #fff !important; opacity: .95 !important;
+}
+
+/* 右侧：红色小胶囊按钮（带小红点） */
+.btn-stop {
+  flex: 0 0 auto;
+  background: #dc2626 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 10px 16px !important;
+  box-shadow: 0 2px 6px rgba(220,38,38,.25) !important;
+  background-image: none !important;
+  font-weight: 700 !important;
+}
+.btn-stop:hover { background: #b91c1c !important; }
+
+/* 按钮里的小红点（可选：用字符/emoji也行，这里用伪元素） */
+.btn-stop:before {
+  content: "";
+  display: inline-block;
+  width: 8px; height: 8px;
+  background: #fca5a5;
+  border-radius: 50%;
+  margin-right: 8px;
+  box-shadow: 0 0 0 2px rgba(255,255,255,.35) inset;
+  vertical-align: middle;
+}
+
+/* 兼容 Gradio 不同内部结构（button / .gr-button / role=button） */
+.btn-process .gr-button, .btn-process button, .btn-process [role="button"],
+.btn-stop .gr-button,    .btn-stop    button, .btn-stop    [role="button"] {
+  background: transparent !important;   /* 用外层 div 上色更稳 */
+  color: inherit !important;
+  border: none !important;
+}
+
+/* 在现有的 .btn-process 基础上做一个小号版 */
+.btn-process-sm{
+  padding: 8px 14px !important;    /* 缩小内边距 */
+  font-size: 14px !important;      /* 缩小字号 */
+  border-radius: 8px !important;   /* 轻一点的圆角 */
+  width: auto !important;          /* 不要占满整行 */
+  display: inline-flex !important; /* 收缩到内容宽度 */
+  align-items: center;
+}
+/* 右侧上传按钮靠右 */
+.right-align{
+  display:flex;
+  justify-content:flex-end;
+  align-items:flex-end;
+}
+
+/* 搜索栏更紧凑（行高更小，不可拉伸） */
+.half-search textarea{
+  height: 40px !important;
+  resize: none !important;
+}
+
+
+
+
+/* 提示标题样式 */
+.step-title {
+  font-weight: bold;
+  color: #1e40af;
+  margin: 16px 0 8px 0;
+}
+
+
+
+/* ========= 结果卡片：相对定位 + 预留按钮高度，避免覆盖 ========= */
+.result-card {
+  position: relative;        /* 让内部绝对定位的按钮以它为参照 */
+  padding-bottom: 72px;      /* 预留按钮高度的下内边距，避免与表格重叠 */
+}
+
+/* 右下角悬浮 */
+.download-float {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10;
+}
+
+/* 下载区域样式 */
+.btn-success,
+.btn-success .gr-button,
+.btn-success button,
+.btn-success [role="button"] {
+  background-color: #16a34a !important;  /* 绿色 */
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 10px !important;
+  padding: 10px 16px !important;
+  box-shadow: 0 2px 6px rgba(22,163,74,.25) !important;
+  background-image: none !important;      /* 关闭默认渐变，防止灰白 */
+}
+.btn-success:hover,
+.btn-success .gr-button:hover,
+.btn-success button:hover,
+.btn-success [role="button"]:hover {
+  background-color: #15803d !important;   /* 悬停更深 */
+}
+
+
+
+
+/* 小屏时给点更大的底部余量 */
+@media (max-width: 992px) {
+  .result-card { padding-bottom: 88px; }
+}
+
+/* 操作条（按钮 + 状态） */
+.action-bar{
+  align-items: center;
+}
+.wide{ width: 100%; }
+/* 状态信息条样式 */
+.status-bar {
+  background-color: #f1f5f9;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #475569;
+}
+/* 状态栏带淡蓝背景 */
+.status-bar textarea {
+  font-weight: bold !important;
+  font-size: 15px !important;
+  background: #f0f9ff !important;  /* 浅蓝背景 */
+  color: #0f172a !important;       /* 深色文字 */
+  border-radius: 6px !important;   /* 圆角 */
+}
+
+
+/* 表格样式 */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  text-align: left;
+}
+.styled-table th, .styled-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.styled-table thead {
+  background-color: #f3f4f6;
+  font-weight: bold;
+  color: #374151;
+}
+/*高度控制*/
+/* 两列对齐的栅格行：右侧分两行，左侧跨两行 */
+.two-col-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;   /* 左右等宽 */
+  grid-template-rows: auto 1fr;     /* 上行自适应高度，下行占剩余 */
+  gap: 16px;
+  align-items: stretch;              /* 子项等高拉伸 */
+}
+
+/* 左侧上传框：跨两行（与右侧整体上下齐平） */
+.left-span-2 {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;                  /* 跨越第 1、2 行 */
+  display: flex;
+}
+
+/* 让左侧的文件上传组件真正撑满容器高度 */
+.left-span-2 .gr-box,
+.left-span-2 .gr-file,
+.left-span-2 .upload-box {
+  height: 100%;
+  min-height: 360px;                 /* 需要可微调：340~420 */
+  display: flex;
+}
+
+/* 右上（模板级别+下拉）和右下（上传 Excel）各占一行 */
+.right-top {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+.right-bottom {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+/* 右上块内部排版/留白（可按需调整） */
+.right-top .gr-box {
+  padding: 8px 0;
+}
+
+/* 右下上传框高度建议与左侧一致的视觉感（可调） */
+.right-bottom .gr-file,
+.right-bottom .upload-box {
+  min-height: 240px;
+}
+
+/* 小屏降级为单列堆叠 */
+@media (max-width: 1200px) {
+  .two-col-grid { 
+    display: block;
+  }
+  .left-span-2 { 
+    margin-bottom: 16px; 
+  }
+}
+
+/* 三等分说明块容器(模板管理页说明） */
+.three-col-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  align-items:stretch;                     /* 关键：父容器允许子项拉伸 */
+}
+
+/* 兼容 Gradio DOM：让每个子块都成为可拉伸的 flex 容器 */
+.three-col-grid > .gr-column,
+.three-col-grid > div{
+  display:flex;                            /* 子项本身是 flex，才能被拉满 */
+}
+
+/* 统一的卡片容器（外层）：把内部真正撑满 */
+.guide-card{
+  display:flex;
+  width:100%;
+}
+
+/* 兼容不同包裹层级：把卡片里的首层盒子也设为 flex+撑满 */
+.guide-card > .gr-box,
+.guide-card > div{
+  flex:1 1 auto;
+  display:flex;
+}
+
+/* Markdown 实际内容节点（.prose / .gr-markdown）拉满并去掉外边距 */
+.guide-card .prose,
+.guide-card .gr-markdown{
+  flex:1 1 auto;
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  margin:0;
+}
+
+/* 基础视觉：可按需调节 */
+.guide-card .prose{
+  padding:16px 16px;
+  border-radius:12px;
+  background:#fff;             /* 如果已有 card 的背景可去掉这一行 */
+  /* min-height 保底，防止内容极少时太矮 */
+  min-height:140px;
+}
+
+.upload-attach{
+  margin-top:auto;               /* 关键：撑满空白，把这一行推到底部 */
+  padding-top:8px;
+}
+
+
+/* ====== 页面整体布局 ====== */
+.app-shell{
+  display:grid;
+  grid-template-columns:240px 1fr; /* 左侧栏 240 + 右内容区 */
+  gap:0;
+}
+
+/* ====== 左侧侧栏 ====== */
+.sidebar{
+  position:sticky; top:0; align-self:start;
+  height:100vh; box-sizing:border-box;
+  background:#f8fafc;                  /* 浅灰白 */
+  border-right:1px solid #e5e7eb;
+  padding:16px 12px;
+}
+
+/* 品牌区 */
+.brand-wrap{ margin:0 !important; }
+.brand{
+  display:flex; align-items:center; gap:10px;
+  padding:8px 8px 16px 8px;
+  border-bottom:1px dashed #e5e7eb;
+  margin-bottom:12px;
+}
+.brand-icon{
+  width:36px;height:36px;line-height:36px;text-align:center;
+  border-radius:10px; background:#eef2ff; color:#4f46e5; font-size:20px;
+  box-shadow:inset 0 0 0 1px #e0e7ff;
+}
+.brand-title .title{ font-weight:800; color:#0f172a; font-size:15px; letter-spacing:.5px; }
+.brand-title .subtitle{ color:#64748b; font-size:12px; margin-top:2px; }
+
+/* ====== 导航按钮 ====== */
+.nav-btn,.nav-btn .gr-button,.nav-btn button,.nav-btn [role="button"]{
+  width:100% !important; text-align:left !important;
+  background:#fff !important; color:#1f2937 !important;
+  border:1px solid #e5e7eb !important; border-radius:12px !important;
+  padding:12px 14px !important; margin:8px 0 !important;
+  box-shadow:0 1px 2px rgba(0,0,0,.06) !important; background-image:none !important;
+  font-weight:700 !important;
+}
+.nav-btn:hover,.nav-btn .gr-button:hover,.nav-btn button:hover,.nav-btn [role="button"]:hover{
+  background:#f1f5f9 !important; border-color:#dbe2ea !important;
+}
+/* 选中态（初始化时给某个按钮额外加 active 类即可） */
+.nav-btn.active,.nav-btn.active .gr-button,.nav-btn.active button,.nav-btn.active [role="button"]{
+  background:#e6f0ff !important; border-color:#2563eb !important; color:#1e3a8a !important;
+  box-shadow:0 2px 6px rgba(37,99,235,.18) !important;
+}
+
+/* ====== 右侧内容区 ====== */
+.content-area{ padding:16px 24px; }
+
+/* 响应式：窄屏改上下布局 */
+@media (max-width: 992px){
+  .app-shell{ grid-template-columns:1fr; }
+  .sidebar{ position:static; height:auto; border-right:none; border-bottom:1px solid #e5e7eb; }
+}
+
+
+/* 顶部黄条说明 */
+.notice-banner{
+  background: #fff7e6;
+  border: 1px solid #ffe58f;
+  border-radius: 10px;
+  padding: 14px 16px;
+  line-height: 1.6;
+  box-shadow: 0 1px 2px rgba(0,0,0,.03);
+}
+.notice-banner .notice-title{
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.notice-banner .notice-list{
+  margin: 0 0 0 18px;
+  padding: 0;
+}
+
+/* 三列卡片 */
+.section-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 24px;
+  min-height: 220px;      /* 给一个最小高度 */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.section-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card-title{
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.card-list{
+  margin: 0 0 8px 18px;
+  padding: 0;
+}
+.card-tip{
+  font-size: 12px;
+  border-radius: 8px;
+  padding: 8px 10px;
+  line-height: 1.45;
+}
+.card-tip.error{ background:#fff1f0; border:1px solid #ffa39e; color:#a8071a; }
+.card-tip.warning{ background:#fffbe6; border:1px solid #ffe58f; color:#ad6800; }
+
+/* 紧凑表单控件间距（与参考图一致） */
+.compact-field .wrap, 
+.compact-field .container,
+.compact-field .svelte-1ipelgc{
+  margin-top: 6px !important;
+}
+
+/* 上传区域加高、居中提示 */
+.uploader-area{
+  min-height: 160px;
+}
+.uploader-area .file-preview,
+.uploader-area .wrap{
+  min-height: 160px;
+}
+
+
+/* 表格卡片风格，保持与提取页一致 */
+.table-card{
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* 模板管理功能区*/
+/* 工具栏在右侧，行内轻量操作 */
+.table-toolbar{
+  display:flex;
+  justify-content:flex-end;
+  gap:12px;
+  margin-bottom:8px;
+}
+
+/* 链接风格的小按钮（查看/下载） */
+.btn-link{
+  background:transparent !important;
+  color:#2563eb !important;
+  border:none !important;
+  box-shadow:none !important;
+  padding:4px 6px !important;
+  font-weight:600 !important;
+}
+.btn-link:hover{ text-decoration:underline; }
+
+/* 删除保持你记忆的红色样式（btn-stop），再小一点 */
+.btn-link.btn-stop{
+  color:#dc2626 !important;
+  padding:4px 6px !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+/* 让每一行成为定位容器 */
+.df-compact table tbody tr {
+  position: relative;
+  cursor: pointer;
+}
+
+
+/* 给最后一列（更新时间）留出一点右侧空间，避免被提示文字盖住 */
+.df-compact table tbody td:last-child {
+  padding-right: 92px;
+}
+/* hover 淡蓝 */
+.df-compact tbody tr:hover { background-color: #f0f8ff !important; }
+
+/* 常驻选中高亮（淡蓝） */
+.df-compact table tbody tr.tpl-sticky-selected { background: #eaf3ff !important; }
+.df-compact table tbody tr.tpl-sticky-selected td { background: transparent !important; }
+
+/* 彻底去掉“橙色边框/描边/阴影” */
+.df-compact table tbody tr:focus-within,
+.df-compact table tbody tr:focus,
+.df-compact table tbody td:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+
+
+
+
+
+/* 选中行更明显（可选） */
+.df-compact table tbody tr:focus,
+.df-compact table tbody tr[data-selected="true"] {
+  outline: 2px solid #93c5fd;
+  outline-offset: -2px;
+}
+
+
+/* 右侧操作面板 */
+.ops-panel .gr-box{ border:none; box-shadow:none; }
+
+/* ✅ 搜索栏整体设置：单行、无阴影、无拖拽角 */
+.tpl-card .search-compact textarea {
+  background: #fff !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+  height: 40px !important;
+  min-height: 40px !important;
+  max-height: 40px !important;
+  resize: none !important;               /* 去右下角拖拽 */
+  box-shadow: none !important;
+  outline: none !important;
+
+  /* 覆盖 Tailwind ring 阴影 */
+  --tw-ring-shadow: none !important;
+  --tw-ring-color: transparent !important;
+  --tw-ring-offset-shadow: none !important;
+  --tw-shadow: none !important;
+}
+
+/* ✅ 聚焦时也不显示 ring 阴影 */
+.tpl-card .search-compact textarea:focus {
+  border-color: #2563eb !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* ===== 三等分容器（你之前已有，可保留） ===== */
+.action-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  align-items: stretch;
+}
+@media (max-width: 640px) { .action-bar { grid-template-columns: 1fr; } }
+
+/* 基础形态：保证按钮占满格子、等高 */
+.action-btn button,
+.action-btn .gr-button,
+.action-btn [role="button"],
+.action-btn a {
+  width: 100% !important;
+  height: 42px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* ===== 在 action-btn 上复用你的配色类（btn-process / btn-stop） ===== */
+
+/* 蓝色（预览/下载） */
+.action-btn.btn-process button,
+.action-btn.btn-process .gr-button,
+.action-btn.btn-process [role="button"],
+.action-btn.btn-process a {
+  background: #2563eb !important;  /* 你的深蓝 */
+  color: #fff !important;
+  border: none !important;
+}
+.action-btn.btn-process:hover button,
+.action-btn.btn-process:hover .gr-button,
+.action-btn.btn-process:hover [role="button"],
+.action-btn.btn-process:hover a {
+  background: #1d4ed8 !important;
+}
+
+/* 红色（删除） */
+.action-btn.btn-stop button,
+.action-btn.btn-stop .gr-button,
+.action-btn.btn-stop [role="button"],
+.action-btn.btn-stop a {
+  background: #dc2626 !important;
+  color: #fff !important;
+  border: none !important;
+}
+.action-btn.btn-stop:hover button,
+.action-btn.btn-stop:hover .gr-button,
+.action-btn.btn-stop:hover [role="button"],
+.action-btn.btn-stop:hover a {
+  background: #b91c1c !important;
+}
+
+/* 去掉 .btn-stop 默认的小红点（只影响这三个操作键） */
+.action-btn.btn-stop:before { display: none !important; }
+
+
+
+#tpl_module .gr-panel,
+#tpl_module .gr-box,
+#tpl_module .gr-accordion,
+#tpl_module .gr-form,
+#tpl_module .gr-row {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+#tpl_module .tpl-title {    /* 标题本身也去灰底 */
+  margin: 0 0 12px 0;
+  padding: 0;
+  font-weight: 700;
+  font-size: 16px;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* —— 去除 Dataframe 单元格/行的橙色焦点边框/阴影 —— */
+#tpl_table table tbody tr:focus,
+#tpl_table table tbody tr:focus-within,
+#tpl_table td:focus,
+#tpl_table input:focus,
+#tpl_table textarea:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 索引排序下载标题 */
+.tpl-card-title h1,
+.tpl-card-title h2,
+.tpl-card-title h3,
+.tpl-card-title p,
+.tpl-card-title strong {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    background: transparent !important;
+    border: none !important;
+    margin: 0 0 8px 0 !important;
+    padding: 0 !important;
+    font-weight: 600;
+    color: #333 !important; /* 字体颜色可改 */
+}
+
+/* 模板预览标题 */
+.tpl-title h1,
+.tpl-title h2,
+.tpl-title h3,
+.tpl-title p,
+.tpl-title strong {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    background: transparent !important;
+    border: none !important;
+    margin: 0 0 8px 0 !important;
+    padding: 0 !important;
+    font-weight: 600;
+    color: #333 !important;
+}
+
+/* ========== 彻底清空该块的灰底/阴影/边框 ========== */
+#index-tools .gr-panel,
+#index-tools .gr-group,
+#index-tools .gr-accordion,
+#index-tools .gr-form,
+#index-tools .gr-box,
+#index-tools .wrap {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* 标题无任何底色/阴影（若你删了标题，这段也没影响） */
+#index-title, 
+#index-title * {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  margin: 0 0 8px 0 !important;
+  padding: 0 !important;
+  color: #111827 !important;
+}
+
+/* 右侧对齐——按钮在右下角 */
+#index-tools .index-right {
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: flex-end !important;
+}
+
+
+/* 绿色按钮：同时覆盖外层容器 & 内部真实按钮 */
+/* 绿色下载按钮（btn-index 专用，对齐 btn-process 尺寸） */
+.btn-index,
+.btn-index .gr-button,
+.btn-index button,
+.btn-index [role="button"] {
+  background: #22c55e !important;       /* 绿色 */
+  color: #fff !important;
+  border: 1px solid #16a34a !important;
+  border-radius: 8px !important;        /* 和 btn-process 一致 */
+  padding: 6px 12px !important;         /* 🔹 调小，和上传模板一致 */
+  font-size: 14px !important;           /* 🔹 字号保持一致 */
+  font-weight: 600 !important;          /* 稍微轻一点 */
+  letter-spacing: 0.3px;
+  box-shadow: none !important;          /* 去掉多余阴影 */
+  background-image: none !important;
+  min-width: 120px;                     /* 🔹 按钮宽度固定一致 */
+  text-align: center;
+}
+
+/* hover */
+.btn-index:hover,
+.btn-index .gr-button:hover,
+.btn-index button:hover,
+.btn-index [role="button"]:hover {
+  background: #16a34a !important;
+}
+
+/* disabled */
+.btn-index:disabled,
+.btn-index .gr-button:disabled,
+.btn-index button:disabled,
+.btn-index [role="button"][disabled] {
+  background: #a7f3d0 !important;
+  color: #fff !important;
+  border-color: #6ee7b7 !important;
+  opacity: .95 !important;
+}
+.btn-index-sm{
+  padding: 8px 14px !important;    /* 缩小内边距 */
+  font-size: 14px !important;      /* 缩小字号 */
+  border-radius: 8px !important;   /* 轻一点的圆角 */
+  width: auto !important;          /* 不要占满整行 */
+  display: inline-flex !important; /* 收缩到内容宽度 */
+  align-items: center;
+}
+/* 下载文件下方说明文字 */
+#index-download-box {
+  background: #fff;                  /* 白底 */
+  border: 1px solid #e5e7eb;         /* 浅灰边框 */
+  border-radius: 8px;                /* 圆角 */
+  padding: 16px;                     /* 内边距 */
+  margin-bottom: 16px;
+}
+
+/* 标题样式，和其他卡片保持一致 */
+#index-download-box .tpl-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* 描述文字 */
+.index-desc {
+  font-size: 14px;
+  color: #374151; /* 深灰 */
+  line-height: 1.6;
+}
+
+/* 模板预览外框 */
+.tpl-box {
+  border: 1px solid #ddd;   /* 边框 */
+  border-radius: 8px;       /* 圆角 */
+  padding: 12px 16px;       /* 内边距 */
+  margin-top: 12px;
+  background: #fafafa;      /* 背景色，可选 */
+}
+
+
+
+
+/* 让 radio-compact 的高度和搜索框对齐 */
+.col-left .radio-compact .wrap {
+  height: 42px;             /* 和输入框统一高度 */
+  display: flex;
+  align-items: center;      /* 垂直居中 */
+}
+
+/* 搜索框紧凑模式 */
+.search-compact textarea,
+.search-compact input {
+  height: 42px !important;   /* 和 radio 保持一致 */
+  padding: 6px 10px !important;
+}
+
+
+/* ===== 预处理页：说明块 ===== */
+.pre-tip {
+  background: #fff;
+  border: 1px solid #eef2f7;
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 2px rgba(16,24,40,.04);
+  margin-bottom: 14px;
+}
+.pre-tip .title {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+.pre-tip .warn {
+  background: #fff8e5;
+  border: 1px solid #fde2a7;
+  color: #8a6116;
+  padding: 8px 10px;
+  border-radius: 10px;
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+/* ===== 预处理页：处理状态步骤条 ===== */
+.pre-steps {
+  background: #fff;
+  border: 1px solid #eef2f7;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 1px 2px rgba(16,24,40,.04);
+  margin: 12px 0;
+}
+.pre-steps .steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+.pre-steps .step {
+  position: relative;
+  background: #f8fafc;
+  border: 1px solid #edf2f7;
+  border-radius: 12px;
+  padding: 12px 14px;
+  min-height: 58px;
+}
+.pre-steps .step .name {
+  font-weight: 700;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+.pre-steps .state {
+  font-size: 12px;
+  opacity: .9;
+}
+.pre-steps .step.active {
+  background: #ecfdf3;
+  border-color: #a7f3d0;
+}
+.pre-steps .step.done {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+.pre-steps .badge {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  color: #334155;
+}
+.pre-steps .step.active .badge { background:#bbf7d0; color:#065f46; }
+.pre-steps .step.done .badge { background:#e2e8f0; color:#334155; }
+/* 1) 设定设计宽度（比如 1200px），根据视口宽度自动计算缩放比例 */
+.pre-steps{
+  --design-width: 1200;                    /* 你的状态栏设计宽度（px） */
+  /* 缩放因子：当视口小于设计宽度时按比例缩小，范围在 0.6~1 之间可调 */
+  --scale: clamp(0.6, calc(100vw / var(--design-width)), 1);
+  width: 100%;
+  overflow: hidden;                         /* 避免产生横向滚动条 */
+}
+
+/* 2) 让 steps 始终一行展示，并按 --scale 等比缩放。
+      重点：用 width: calc(100% / var(--scale)) 做“宽度补偿”，
+      这样即使缩小，视觉宽度仍能正好铺满父容器，不会被裁切或错位。*/
+.pre-steps .steps{
+  display: flex;
+  flex-wrap: nowrap;                        /* 禁止换行 */
+  align-items: stretch;
+  justify-content: space-between;
+
+  transform: scale(var(--scale));
+  transform-origin: left center;            /* 从左侧开始缩放 */
+  width: calc(100% / var(--scale));         /* ★ 宽度补偿：关键 */
+  will-change: transform;
+}
+
+/* 3) 步骤卡片与连线的基础宽度，按需调整 */
+.pre-steps .step{
+  flex: 0 0 320px;                          /* 每步基础宽度（设计态） */
+  box-sizing: border-box;
+}
+.pre-steps .step-connector{
+  flex: 0 0 120px;                          /* 连接线的基础长度 */
+}
+.pre-steps .connector-line{ width: 100%; }
+
+/* 4) 小屏也不换行，仅通过缩放控制大小。
+      如需更小的下限，把 clamp 的 0.6 改小一些（比如 0.5） */
+@media (max-width: 768px){
+  .pre-steps{ --scale: clamp(0.55, calc(100vw / var(--design-width)), 1); }
+}
+
+
+/* 预处理步骤之间的进度条线 */
+.progress-line-container {
+  flex: 0 0 80px; /* 固定宽度容器 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.progress-line {
+  height: 4px;
+  background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+  border-radius: 2px;
+  transition: width 0.8s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  min-width: 0; /* 允许宽度为0 */
+}
+
+/* 进度条动画效果 */
+.progress-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* 当前活跃步骤的样式 */
+.step.active {
+  background: #ecfdf3 !important;
+  border-color: #22c55e !important;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1) !important;
+}
+
+.step.active .badge {
+  background: #22c55e !important;
+  color: white !important;
+}
+
+/* 已完成步骤的样式 */
+.step.done {
+  background: #f0fdf4 !important;
+  border-color: #16a34a !important;
+}
+
+.step.done .badge {
+  background: #16a34a !important;
+  color: white !important;
+}
+
+/* 等待步骤的样式 */
+.step {
+  background: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+.step .badge {
+  background: #94a3b8 !important;
+  color: white !important;
+}
+
+/* 步骤之间的连接线容器 */
+.step-connector {
+  flex: 0 0 240px; /* 从180px增加到240px，让连接线更长 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  position: relative;
+}
+
+/* 连接线样式 */
+.connector-line {
+  width: 100%; /* 占满整个容器宽度 */
+  height: 4px;
+  background: #e2e8f0;
+  border-radius: 2px;
+  transition: all 0.5s ease;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 连接线状态样式 */
+.connector-line.connector-done {
+  background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
+}
+
+.connector-line.connector-active {
+  background: linear-gradient(90deg, #22c55e 0%, #3b82f6 100%);
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+  animation: pulse-green-blue 2s infinite alternate;
+}
+
+.connector-line.connector-waiting {
+  background: #e2e8f0;
+}
+
+/* 动画定义 */
+@keyframes pulse-green-blue {
+  0% {
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 12px rgba(34, 197, 94, 0.5);
+  }
+}
+
+/* 步骤容器 */
+.pre-steps .steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+  width: 100%;
+}
+
+/* 单个步骤框 */
+.pre-steps .step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 25px; /* 从15px 20px增加到20px 25px */
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+  text-align: center;
+  transition: all 0.3s ease;
+  min-width: 200px; /* 从160px增加到200px */
+  max-width: 250px; /* 从200px增加到250px */
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 活跃步骤样式 */
+.pre-steps .step.active {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+/* 完成步骤样式 */
+.pre-steps .step.done {
+  border-color: #22c55e;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+}
+
+/* 步骤名称 */
+.pre-steps .step .name {
+  font-weight: 600;
+  color: #333;
+  margin-top: 10px; /* 从5px增加到10px */
+  font-size: 14px; /* 从14px增加到18px */
+}
+
+/* 步骤状态描述 */
+.pre-steps .step .state {
+  font-size: 12px; /* 从12px增加到14px */
+  color: #666;
+  margin-top: 2px; /* 从2px增加到8px */
+  line-height: 1.5; /* 增加行高 */
+}
+
+/* 徽章样式 */
+.pre-steps .step .badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px; /* 从4px 8px增加到8px 16px */
+  border-radius: 12px;
+  font-size: 10px; /* 从10px增加到12px */
+  font-weight: 700;
+  color: #fff;
+  background-color: #94a3b8;
+  margin-bottom: 5px; /* 从5px增加到10px */
+  transition: all 0.3s ease;
+}
+
+/* 活跃徽章样式 */
+.pre-steps .step.active .badge {
+  background-color: #3b82f6;
+  animation: pulse-blue 1.5s infinite alternate;
+}
+
+/* 完成徽章样式 */
+.pre-steps .step.done .badge {
+  background-color: #22c55e;
+}
+
+@keyframes pulse-blue {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+  }
+}
+
+/* 整体容器 */
+.pre-steps {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* 确保徽章文字颜色为白色 */
+.pre-steps .step .badge {
+  color: white !important;
+}
+
+
+
